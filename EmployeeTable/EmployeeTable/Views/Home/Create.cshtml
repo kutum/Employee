@@ -1,0 +1,26 @@
+﻿@model EmployeeTable.Models.Absence
+@{
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+
+<h2>Добавление записи об отсутствии</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
+    <br /><br />
+
+    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @readonly = "true" } })
+
+    <br /><br />
+    @Html.LabelFor(model => model.Reason, "Причина")
+    <br />
+    @Html.EditorFor(model => model.Reason)
+    <br /><br />
+    <input type="submit" value="Добавить" />
+}
+
+
+

@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+@model EmployeeTable.Models.Absence
+<h2>Удаление записи об отсутствии</h2>
+<dl>
+    <dt>Номер записи</dt>
+    <dd>
+        @Html.DisplayFor(model => model.IdAbsences)
+    </dd>
+
+    <dt>Фамилия</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Employee.Surname)
+    </dd>
+
+    <dt>Имя</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Employee.Name)
+    </dd>
+    <dt>Отчёство</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Employee.Lastname)
+    </dd>
+    <dt>Дата</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Date)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}
+

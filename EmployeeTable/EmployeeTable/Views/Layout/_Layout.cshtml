@@ -1,0 +1,50 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Табель</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery-ui-timepicker-addon")
+
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>*@
+
+    <script>
+        $().ready(function () {
+            $('.datePicker').datetimepicker();
+        })
+    </script>
+</head>
+<body>
+    @* Создаём таблицу из двух горизонтальных ячеек *@
+    <table>
+        <tr>
+            <td align="left">
+                <h3>Табель отсутствия на работе сотрудников</h3>
+            </td>
+        </tr>
+    </table>
+    <br />
+
+    @RenderBody()
+
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+

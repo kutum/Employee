@@ -1,0 +1,80 @@
+﻿@model IEnumerable<EmployeeTable.Models.Absence>
+
+@{
+   Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Добавить запись", "Create");
+    </p>
+    <div>
+        <table border="0">
+            <tr class="header">
+                @*<td>
+                <p># п/п</p>
+                </td>*@
+                <td>
+                    <p>Фамилия</p>
+                </td>
+                <td>
+                    <p> Имя </p>
+                </td>
+                <td>
+                    <p> Отчество </p>
+                </td>
+                <td>
+                    <p> Должность </p>
+                </td>
+                <td>
+                    <p> Дата </p>
+                </td>
+                <td>
+                    <p> Причина </p>
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(modelitem => item.IdAbsences)
+                    </td>*@
+
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Employee.Surname)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Employee.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Employee.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Employee.Position)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Reason)
+                    </td>
+                    <td>
+                        @Html.ActionLink("X", "Delete",new { id = item.IdAbsences })
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+
+</body>
+</html>
