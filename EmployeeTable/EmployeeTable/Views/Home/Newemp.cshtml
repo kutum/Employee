@@ -1,0 +1,22 @@
+﻿@model EmployeeTable.Models.Employee
+
+@{
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+<h2>Добавление сотрудника</h2>
+
+@using (Html.BeginForm())
+{
+    
+    <p>Фамилия</p>
+    @Html.EditorFor(model => model.Surname)
+    <p>Имя</p>
+    @Html.EditorFor(model => model.Name)
+     <p>Отчество</p>
+    @Html.EditorFor(model => model.Lastname)
+    <p>Должность</p>
+    @Html.EditorFor(model => model.Position)
+    <input type="submit" value="Добавить" />
+}
+

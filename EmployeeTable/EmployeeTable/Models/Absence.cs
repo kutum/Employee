@@ -8,7 +8,7 @@ namespace EmployeeTable.Models
         [Key]public int IdAbsences { get; set; }
 
         [DataType(DataType.DateTime), Required]
-        //[DisplayFormat(DataFormatString = "yyyy/MM/dd", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
         public string Reason { get; set; }
 

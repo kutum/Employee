@@ -12,7 +12,7 @@
     @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
     <br /><br />
 
-    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @readonly = "true" } })
+    @Html.EditorFor(model => model.Date, "{0:dd.MM.yyyy hh:mm}", new { @class = "form-control default-date-picker" })
 
     <br /><br />
     @Html.LabelFor(model => model.Reason, "Причина")

@@ -8,15 +8,14 @@ using System.Web.Mvc;
 
 namespace EmployeeTable.Controllers
 {
-    public class CreateController : Controller
+    public class EmployeesController : Controller
     {
-        // GET: Create
-        
-        public ActionResult Create()
+        AbsencesContext db = new AbsencesContext();
+
+        // GET: Employees
+        public ActionResult Index()
         {
-            var model = new Absence();
-            model.Date = DateTime.Now;
-            return View(model);
+            return View();
         }
     }
 }

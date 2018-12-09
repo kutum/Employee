@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EmployeeTable.Models.Employee>
+@{
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+
+
+<h2>Сотрудники</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <table>
+        <p>
+            @Html.ActionLink("На главную", "Index", "Home")
+        </p>
+        <p>
+            @Html.ActionLink("Добавить","Newemp")
+        </p>
+        <tr>
+            @*<td>Номер записи</td>*@
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
+            <td>Полное имя</td>
+            <td>Должность</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(model => item.idEmployee)
+                </td>*@
+
+
+                <td>
+                    @Html.EditorFor(model => item.Surname)
+                </td>
+
+
+                <td>
+                    @Html.EditorFor(model => item.Name)
+                </td>
+
+                <td>
+                    @Html.EditorFor(model => item.Lastname)
+                </td>
+
+                <td>
+                    @Html.EditorFor(model => item.Fullname)
+                </td>
+
+                <td>
+                    @Html.EditorFor(model => item.Position)
+                </td>
+                <td>
+                    @Html.ActionLink("X", "Delemp",   new { id = item.idEmployee })
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

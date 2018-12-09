@@ -23,6 +23,12 @@ namespace EmployeeTable.Contollers
             return View(absences.ToList());
         }
 
+        
+        public ActionResult Employees()
+        {
+            return View(db.Employees);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -31,6 +37,7 @@ namespace EmployeeTable.Contollers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(Absence absence)
         {
@@ -63,5 +70,44 @@ namespace EmployeeTable.Contollers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Newemp()
+        {
+            return View();
+        }
+        [HttpPost, ActionName("Newemp")]
+        public ActionResult Newemp(Employee employee)
+        {
+            db.Employees.Add(employee);
+            employee.Fullname = employee.Surname + " " +
+                                employee.Name.Substring(0, 1) + "." +
+                                employee.Lastname.Substring(0, 1) + ".";
+
+            db.SaveChanges();
+            return RedirectToAction("Employees");
+        }
+
+        [HttpGet]
+        public ActionResult Delemp(int id)
+        {
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
+        }
+        [HttpPost, ActionName("Delemp")]
+        public ActionResult DelempConfirmed(int id)
+        {
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            db.Employees.Remove(employee);
+            db.SaveChanges();
+            return RedirectToAction("Employees");
+        }
     }
 }
