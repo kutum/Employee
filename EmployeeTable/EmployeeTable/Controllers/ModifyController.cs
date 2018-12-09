@@ -8,11 +8,11 @@ using System.Web.Mvc;
 
 namespace EmployeeTable.Controllers
 {
-    public class DeleteController : Controller
+    public class ModifyController : Controller
     {
         AbsencesContext db = new AbsencesContext();
 
-        // GET: DeleteConfirmed
+        // GET: Modify
         public ActionResult Index(int id)
         {
             var absences = db.Absences.Where(x => x.IdAbsences == id);

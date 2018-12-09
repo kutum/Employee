@@ -32,8 +32,8 @@ namespace EmployeeTable.Contollers
         [HttpGet]
         public ActionResult Create()
         {
-            SelectList surnames = new SelectList(db.Employees, "idEmployee", "Fullname");
-            ViewBag.Employees = surnames;
+            SelectList Fullnames = new SelectList(db.Employees, "idEmployee", "Fullname");
+            ViewBag.Employees = Fullnames;
 
             return View();
         }
@@ -106,6 +106,60 @@ namespace EmployeeTable.Contollers
                 return HttpNotFound();
             }
             db.Employees.Remove(employee);
+            db.SaveChanges();
+            return RedirectToAction("Employees");
+        }
+
+        [HttpGet]
+        public ActionResult Modify(int? id)
+        {
+            SelectList Fullnames = new SelectList(db.Employees, "idEmployee", "Fullname");
+            ViewBag.Employees = Fullnames;
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Absence absence = db.Absences.Find(id);
+            if (absence != null)
+            {
+                return View(absence);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult Modify(Absence absence)
+        {
+            db.Entry(absence).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ModifyEmp(int? id)
+        {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Employee employee = db.Employees.Find(id);
+            if (employee != null)
+            {
+                return View(employee);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult ModifyEmp(Employee employee)
+        {
+            employee.Fullname = employee.Surname + " " +
+                                employee.Name.Substring(0, 1) + "." +
+                                employee.Lastname.Substring(0, 1) + ".";
+
+            db.Entry(employee).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Employees");
         }

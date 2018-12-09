@@ -1,0 +1,36 @@
+﻿@model EmployeeTable.Models.Employee
+@{
+    ViewBag.Title = "ModifyEmp";
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+<h2>Изменение данных о сотруднике</h2>
+
+<h2>Редактирование записи @Model.idEmployee</h2>
+@using (Html.BeginForm("ModifyEmp", "Home", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.idEmployee)
+    <p>
+        @Html.LabelFor(m => m.Surname, "Фамилия")
+        <br />
+        @Html.EditorFor(m => m.Surname, "Фамилия")
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Name, "Имя")
+        <br />
+        @Html.EditorFor(m => m.Name, "Имя")
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Lastname, "Отчество")
+        <br />
+        @Html.EditorFor(m => m.Lastname, "Отчество")
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Position, "Должность")
+        <br />
+        @Html.EditorFor(m => m.Position, "Должность")
+    </p>
+    <p><input type="submit" value="Отправить" /></p>
+</fieldset>
+}

@@ -211,6 +211,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CreateController.cs" />
+    <Compile Include="Controllers\ModifyController.cs" />
+    <Compile Include="Controllers\ModifyEmpController.cs" />
     <Compile Include="Controllers\NewempController.cs" />
     <Compile Include="Controllers\DeleteController.cs" />
     <Compile Include="Controllers\DelempController.cs" />
@@ -246,6 +248,8 @@
     <Content Include="Views\Home\Employees.cshtml" />
     <Content Include="Views\Home\Newemp.cshtml" />
     <Content Include="Views\Home\Delemp.cshtml" />
+    <Content Include="Views\Home\Modify.cshtml" />
+    <Content Include="Views\Home\ModifyEmp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -253,7 +257,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\ModifyEmp\" />
+    <Folder Include="Views\Modify\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

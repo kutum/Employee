@@ -7,19 +7,19 @@
 
 <h2>Сотрудники</h2>
 
-<html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title></title>
 </head>
-<body>
+<fieldset>
+    <p>
+        @Html.ActionLink("На главную", "Index", "Home")
+    </p>
+    <p>
+        @Html.ActionLink("Добавить", "Newemp")
+    </p>
     <table>
-        <p>
-            @Html.ActionLink("На главную", "Index", "Home")
-        </p>
-        <p>
-            @Html.ActionLink("Добавить","Newemp")
-        </p>
         <tr>
             @*<td>Номер записи</td>*@
             <td>Фамилия</td>
@@ -32,37 +32,42 @@
         {
 
             <tr>
-                @*<td>
-                    @Html.DisplayFor(model => item.idEmployee)
-                </td>*@
-
+                    @Html.HiddenFor(model => item.idEmployee)
+ 
 
                 <td>
-                    @Html.EditorFor(model => item.Surname)
+                    @Html.DisplayFor(model => item.Surname)
                 </td>
 
 
                 <td>
-                    @Html.EditorFor(model => item.Name)
+                    @Html.DisplayFor(model => item.Name)
                 </td>
 
                 <td>
-                    @Html.EditorFor(model => item.Lastname)
+                    @Html.DisplayFor(model => item.Lastname)
                 </td>
 
                 <td>
-                    @Html.EditorFor(model => item.Fullname)
+                    @Html.DisplayFor(model => item.Fullname)
                 </td>
 
                 <td>
-                    @Html.EditorFor(model => item.Position)
+                    @Html.DisplayFor(model => item.Position)
                 </td>
                 <td>
-                    @Html.ActionLink("X", "Delemp",   new { id = item.idEmployee })
+                    @Html.ActionLink("X", "Delemp", new { id = item.idEmployee })
+                </td>
+                <td>
+                    @Html.ActionLink("M", "ModifyEmp", new { id = item.idEmployee })
                 </td>
             </tr>
         }
     </table>
 
-</body>
-</html>
+  
+</fieldset>
+  
+}
+
+

@@ -1,0 +1,32 @@
+﻿@model EmployeeTable.Models.Absence
+
+@{
+    ViewBag.Title = "Modify";
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+<h2>Редактирование записи @Model.IdAbsences</h2>
+@using (Html.BeginForm("Modify", "Home", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.IdAbsences)
+        <p>
+            @Html.LabelFor(m => m.Employee.Fullname, "ФИО")
+            <br />
+            @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
+
+        </p>
+            <p>
+                @Html.LabelFor(m => m.Reason, "Дата")
+                <br />
+                @Html.EditorFor(model => model.Date, "dd.MM.yyyy hh:mm", new { @class = "form-control default-date-picker" })
+
+            </p>
+        <p>
+            @Html.LabelFor(m => m.Reason, "Причина")
+            <br />
+            @Html.EditorFor(m => m.Reason)
+        </p>
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}
