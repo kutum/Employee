@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EmployeeTable.Models.Absence>
+﻿@*@model IEnumerable<EmployeeTable.Models.Absence>*@
+@model EmployeeTable.Models.AbsenceListViewModel
 
 @{
    Layout = "~/Views/Layout/_Layout.cshtml";
@@ -12,6 +13,25 @@
     <title></title>
 </head>
 <body>
+
+    @*@RenderPage("Filter.cshtml")*@
+
+    <form method="get">
+        <div class="form-inline">
+            <label class="control-label">ФИО: </label>
+            @Html.DropDownList("Fullname", Model.Fullnames as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Должность: </label>
+            @Html.DropDownList("Position", Model.Position as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
+            <label class="control-label">Причина: </label>
+            @Html.DropDownList("Reason", Model.Reason as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
+            <input type="submit" value="Фильтр" class="btn btn-default" />
+        </div>
+    </form>
+
+
     <p>
         @Html.ActionLink("Добавить запись", "Create")
     </p>
@@ -26,14 +46,14 @@
                     <p># п/п</p>
                     </td>*@
                 @*<td>
-                    <p>Фамилия</p>
-                </td>
-                <td>
-                    <p> Имя </p>
-                </td>
-                <td>
-                    <p> Отчество </p>
-                </td>*@
+                        <p>Фамилия</p>
+                    </td>
+                    <td>
+                        <p> Имя </p>
+                    </td>
+                    <td>
+                        <p> Отчество </p>
+                    </td>*@
                 <td>
                     ФИО
                 </td>
@@ -47,7 +67,7 @@
                     <p> Причина </p>
                 </td>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Absences)
             {
                 <tr>
                     @*<td>
@@ -55,15 +75,15 @@
                         </td>*@
 
                     @*<td>
-                        @Html.DisplayFor(modelitem => item.Employee.Surname)
-                    </td>
+                            @Html.DisplayFor(modelitem => item.Employee.Surname)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelitem => item.Employee.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.Employee.Lastname)
-                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Employee.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Employee.Lastname)
+                        </td>*@
                     <td>
                         @Html.DisplayFor(modelitem => item.Employee.Fullname)
                     </td>
@@ -80,7 +100,7 @@
                         @Html.ActionLink("X", "Delete", new { id = item.IdAbsences })
                     </td>
                     <td>
-                        @Html.ActionLink("M","Modify", new {id = item.IdAbsences })
+                        @Html.ActionLink("M", "Modify", new { id = item.IdAbsences })
                     </td>
                 </tr>
             }

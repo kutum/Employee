@@ -15,15 +15,50 @@ namespace EmployeeTable.Contollers
     {
         AbsencesContext db = new AbsencesContext();
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+
+        //    var absences = db.Absences.Include(f => f.Employee);
+
+        //    return View(absences.ToList());
+        //}
+
+        public ActionResult Index(string Fullname, string Position, string Reason)
         {
+            IQueryable<Absence> absences = db.Absences.Include(p => p.Employee);
 
-            var absences = db.Absences.Include(f => f.Employee);
+            if (!String.IsNullOrEmpty(Fullname) && Fullname != "Все")
+            {
+                absences = absences.Where(p => p.Employee.Fullname == Fullname);
+            }
 
-            return View(absences.ToList());
+            if (!String.IsNullOrEmpty(Position) && Position != "Все")
+            {
+                absences = absences.Where(p => p.Employee.Position == Position);
+            }
+
+            if (!String.IsNullOrEmpty(Reason) && Reason != "Все")
+            {
+                absences = absences.Where(p => p.Reason == Reason);
+            }
+
+            List<Employee> employees = db.Employees.ToList();
+            employees.Insert(0, new Employee { Fullname = "Все",Position = "Все", idEmployee = 0 });
+
+            List<Absence> absenceslist = db.Absences.ToList();
+            absenceslist.Insert(0, new Absence { IdAbsences = 0, Reason = "Все" });
+
+            AbsenceListViewModel alvm = new AbsenceListViewModel
+            {
+                Absences = absences.ToList(),
+                Fullnames = new SelectList(employees, "Fullname", "Fullname"),
+                Position = new SelectList(employees, "Position", "Position"),
+                Reason = new SelectList(absenceslist, "Reason", "Reason")
+            };
+            return View(alvm);
         }
 
-        
+
         public ActionResult Employees()
         {
             return View(db.Employees);

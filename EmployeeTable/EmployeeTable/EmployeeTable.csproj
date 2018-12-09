@@ -223,6 +223,7 @@
     </Compile>
     <Compile Include="Models\Absence.cs" />
     <Compile Include="Context\AbsencesContext.cs" />
+    <Compile Include="Models\AbsenceListViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
