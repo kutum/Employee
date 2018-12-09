@@ -3,71 +3,65 @@
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
+@*Страница отображающая всех сотрудников
+
+    ActionLink - переход по ссылке на страницу
+    DisplayFor - отображение значения поля
+    HiddenFor - скрытое отображения поля
+*@
 
 
-<h2>Сотрудники</h2>
+<h3>Сотрудники</h3>
+
+<table>
+    @*Строка с заголовками таблицы*@
+    <tr class="header">
+
+        <td>Фамилия</td>
+        <td>Имя</td>
+        <td>Отчество</td>
+        <td>Полное имя</td>
+        <td>Должность</td>
+        <td colspan="2"></td>
+    </tr>
+    @*Цикл, выбирающий сотрудников из модели*@
+    @foreach (var item in Model)
+    {
+    <tr>
+        @*Уникальный номер*@
+        @Html.HiddenFor(model => item.IdEmployee)
+        <td>
+            @Html.DisplayFor(model => item.Surname)
+        </td>
 
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<fieldset>
-    <p>
-        @Html.ActionLink("На главную", "Index", "Home")
-    </p>
-    <p>
-        @Html.ActionLink("Добавить", "Newemp")
-    </p>
-    <table>
-        <tr>
-            @*<td>Номер записи</td>*@
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Полное имя</td>
-            <td>Должность</td>
-        </tr>
-        @foreach (var item in Model)
-        {
+        <td>
+            @Html.DisplayFor(model => item.Name)
+        </td>
 
-            <tr>
-                    @Html.HiddenFor(model => item.idEmployee)
- 
+        <td>
+            @Html.DisplayFor(model => item.Lastname)
+        </td>
 
-                <td>
-                    @Html.DisplayFor(model => item.Surname)
-                </td>
+        <td>
+            @Html.DisplayFor(model => item.Fullname)
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => item.Position.Name)
+        </td>
+        <td>
+            @*Кнопка удаления*@
+            @Html.ActionLink("X", "Delemp", new { id = item.IdEmployee }, new { @class = "DeleteEntry" })
+        </td>
+        <td>
+            @*Кнопка редактирования*@
+            @Html.ActionLink("M", "ModifyEmp", new { id = item.IdEmployee }, new { @class = "ModifyEntry" })
+        </td>
+    </tr>
+    }
+</table>
 
 
-                <td>
-                    @Html.DisplayFor(model => item.Name)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(model => item.Lastname)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(model => item.Fullname)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(model => item.Position)
-                </td>
-                <td>
-                    @Html.ActionLink("X", "Delemp", new { id = item.idEmployee })
-                </td>
-                <td>
-                    @Html.ActionLink("M", "ModifyEmp", new { id = item.idEmployee })
-                </td>
-            </tr>
-        }
-    </table>
-
-  
-</fieldset>
-  
-}
 
 

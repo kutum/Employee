@@ -1,8 +1,10 @@
-﻿<html>
+﻿@*Подложка всех страниц*@
+
+<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Табель</title>
-
+    @*Подключаем css и jquery. Необходимо для работы со стилями и некоторыми пользовательскими элементами*@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -14,7 +16,7 @@
     @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>*@
-
+    @*Отображение календаря для ввода даты, что упрощает ввод*@
     <script>
         $().ready(function () {
 
@@ -23,25 +25,34 @@
             });
         })
     </script>
+
+    
 </head>
 <body>
-    @* Создаём таблицу из двух горизонтальных ячеек *@
-    <table>
+    <br />
+    
+     <h2>Табель отсутствия на работе сотрудников</h2>
+    <table>@*Верхняя панель с основными ссылками на страницы*@
         <tr>
-            <td align="left">
-                <h3>Табель отсутствия на работе сотрудников</h3>
+            <td>
+                @Html.ActionLink("Главная страница", "Index", "Home",new { @class = "MainPage"})
+            </td>
+            <td>
+                @Html.ActionLink("Запись об отсутствии", "Create", null, new { @class = "Add" })
+            </td>
+            <td>
+                @Html.ActionLink("Список сотрудников", "Employees", null, new { @class = "EmployeeList" })
+            </td>
+            <td>
+                @Html.ActionLink("Добавить сотрудника", "Newemp", null, new { @class = "EmployeeAdd" })
             </td>
         </tr>
     </table>
     <br />
 
+    @*Отображение содержимого страницы*@
     @RenderBody()
-
-
-
 </body>
-
-
 </html>
 
 

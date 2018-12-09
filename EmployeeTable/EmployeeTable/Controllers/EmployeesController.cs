@@ -13,9 +13,14 @@ namespace EmployeeTable.Controllers
         AbsencesContext db = new AbsencesContext();
 
         // GET: Employees
+
+        /*
+         * Контроллер сотрудники
+         */
+
         public ActionResult Index(int? id)
         {
-            var employee  = db.Employees.Where(x => x.idEmployee == id);
+            var employee  = db.Employees.Where(x => x.IdEmployee == id);
             return View(employee);
         }
     }

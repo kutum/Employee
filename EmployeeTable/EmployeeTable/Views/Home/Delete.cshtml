@@ -1,27 +1,25 @@
-﻿@{
+﻿@model EmployeeTable.Models.Absence
+@{
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
-@model EmployeeTable.Models.Absence
-<h2>Удаление записи об отсутствии</h2>
-<dl>
-    <dt>Номер записи</dt>
-    <dd>
-        @Html.DisplayFor(model => model.IdAbsences)
-    </dd>
 
-    <dt>ФИО</dt>
-    <dd>
-        @Html.DisplayFor(model => model.Employee.Fullname)
-    </dd>
-
-    <dt>Дата</dt>
-    <dd>
-        @Html.DisplayFor(model => model.Date)
-    </dd>
-</dl>
+@*Cтраница с вопросом о подрверджении удаления записи об отсутствии*@
+<h3>Удаление записи об отсутствии</h3>
 
 @using (Html.BeginForm())
 {
-    <input type="submit" value="Удалить" />
-}
+    <table>
+        <tr>
+            <td>
+                Вы действительно хотите удалить запись?
+            </td>
+        </tr>
+        <tr>
+            <td>
 
+                <input type="submit" value="Удалить" class="button15" />
+
+            </td>
+        </tr>
+    </table>
+}

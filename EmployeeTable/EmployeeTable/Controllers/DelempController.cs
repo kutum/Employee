@@ -12,9 +12,13 @@ namespace EmployeeTable.Controllers
         AbsencesContext db = new AbsencesContext();
 
         // GET: Delemp
+        /*
+         * Контроллер удаления сотрудника
+         */
+
         public ActionResult Index(int id)
         {
-            var employees = db.Employees.Where(x => x.idEmployee == id);
+            var employees = db.Employees.Where(x => x.IdEmployee == id);
             return View(employees);
         }
     }

@@ -1,36 +1,77 @@
 ﻿@model EmployeeTable.Models.Employee
 @{
-    ViewBag.Title = "ModifyEmp";
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<h2>Изменение данных о сотруднике</h2>
+@*Страница изменения данных об отсутвии
 
-<h2>Редактирование записи @Model.idEmployee</h2>
+    LabelFor - отображение названия для вводимого поля
+    ValidationMessageFor - проверка корректности ввода со стороны пользователя (отображает ошибку)
+    EditorFor - поле для ввода текста
+*@
+
+
+<h3>Редактирование записи @Model.Fullname</h3>
+
+@*Отправляем РОST запрос серверу в контроллер*@
 @using (Html.BeginForm("ModifyEmp", "Home", FormMethod.Post))
 {
-<fieldset>
-    @Html.HiddenFor(m => m.idEmployee)
-    <p>
-        @Html.LabelFor(m => m.Surname, "Фамилия")
-        <br />
-        @Html.EditorFor(m => m.Surname, "Фамилия")
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Name, "Имя")
-        <br />
-        @Html.EditorFor(m => m.Name, "Имя")
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Lastname, "Отчество")
-        <br />
-        @Html.EditorFor(m => m.Lastname, "Отчество")
-    </p>
-    <p>
-        @Html.LabelFor(m => m.Position, "Должность")
-        <br />
-        @Html.EditorFor(m => m.Position, "Должность")
-    </p>
-    <p><input type="submit" value="Отправить" /></p>
-</fieldset>
+<table>
+    <tr>
+        <td width="20%">
+            @*Таблица содержащая фамилию, имя, отчество и должность сотрудника
+            Поле фамилия и инициалы заполняется автоматически в контроллере
+            *@
+            @Html.HiddenFor(m => m.IdEmployee)
+
+            @Html.LabelFor(m => m.Surname, "Фамилия")
+        </td>
+        <td width="40%">
+            @Html.EditorFor(m => m.Surname)
+        </td>
+        <td width="40%">
+            @Html.ValidationMessageFor(model => model.Surname)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.Name, "Имя")
+        </td>
+        <td>
+            @Html.EditorFor(m => m.Name)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => model.Name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Lastname, "Отчество")
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Lastname)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => model.Lastname)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Position.Name, "Должность")
+        </td>
+        <td>
+            @Html.HiddenFor(model => model.idPosition)
+            @Html.HiddenFor(model=>model.Position.IdPosition)
+            @Html.EditorFor(model => model.Position.Name)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => model.Position.Name)
+        </td>
+    </tr>
+<tr>
+    <td colspan="3">
+        <input type="submit" value="Отправить" class="button15"/>
+    </td>
+</tr>
+</table>
 }

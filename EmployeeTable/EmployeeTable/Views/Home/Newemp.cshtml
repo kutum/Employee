@@ -4,19 +4,72 @@
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<h2>Добавление сотрудника</h2>
+@*Страница изменения данных об отсутвии
+
+    LabelFor - отображение названия для вводимого поля
+    ValidationMessageFor - проверка корректности ввода со стороны пользователя (отображает ошибку)
+    EditorFor - поле для ввода текста
+*@
+
+<h3>Добавление сотрудника</h3>
 
 @using (Html.BeginForm())
 {
+<table>
+    <tr>
+        <td width="20%">
+            @Html.LabelFor(model => model.Surname, "Фамилия")
+        </td>
+        <td width="20%" align="left">
+            @Html.EditorFor(model => model.Surname)
+            @Html.Hidden("Fullname"," ")
+        </td>
+        <td width="60%">
+            @Html.ValidationMessageFor(model => model.Surname)
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Name, "Имя")
+        </td>
+        <td align="left">
+            @Html.EditorFor(model => model.Name)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => model.Name)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Lastname, "Отчество")
+        </td>
+        <td align="left">
+            @Html.EditorFor(model => model.Lastname)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => Model.Lastname)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Position.Name, "Должность")
+        </td>
+        <td align="left">
+            @Html.EditorFor(model => model.Position.Name)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => Model.Position.Name)
+        </td>
+    </tr>
     
-    <p>Фамилия</p>
-    @Html.EditorFor(model => model.Surname)
-    <p>Имя</p>
-    @Html.EditorFor(model => model.Name)
-     <p>Отчество</p>
-    @Html.EditorFor(model => model.Lastname)
-    <p>Должность</p>
-    @Html.EditorFor(model => model.Position)
-    <input type="submit" value="Добавить" />
+    <tr>
+
+        <td colspan="3">
+            <input type="submit" value="Добавить" class="button15" />
+        </td>
+    </tr>
+
+</table>
 }
 

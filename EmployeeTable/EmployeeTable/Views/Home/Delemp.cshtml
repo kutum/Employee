@@ -4,27 +4,45 @@
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<h2>Удаление сотрудника</h2>
+@*Страница удаления существующего сотрудника
+
+    LabelFor - отображение обозначения (названия) поля для воода
+    DisplayFor - отображение значения поля
+*@
+
+<h3>Удаление сотрудника</h3>
 @using (Html.BeginForm())
 {
 
-    <dl>
-        <dt>Номер записи</dt>
-        <dd>
-            @Html.DisplayFor(model => model.idEmployee)
-        </dd>
+    <table>
+        <tr class="header"> @*Строка с заголовками таблицы*@
+            <td width="10%">
+                @Html.LabelFor(model => model.IdEmployee, "Номер записи")
+            </td>
+            <td>
+                @Html.LabelFor(model => model.Fullname, "Фамилия и инициалы")
 
-        <dt>ФИО</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fullname)
-        </dd>
+            </td>
+            <td>
+                @Html.LabelFor(model => model.Position.Name, "Должность")
+            </td>
+        </tr>
+        <tr>@*Строка с данными*@
+            <td>
+                @Html.DisplayFor(model => model.IdEmployee)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Position.Name)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Удалить" class="button15" />
+            </td>
+        </tr>
+    </table>
 
-        <dt>Должность</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Position)
-        </dd>
-    </dl>
-
-
-<input type="submit" value="Удалить" />
 }

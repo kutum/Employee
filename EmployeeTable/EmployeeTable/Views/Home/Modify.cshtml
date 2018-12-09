@@ -1,32 +1,68 @@
 ﻿@model EmployeeTable.Models.Absence
 
 @{
-    ViewBag.Title = "Modify";
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<h2>Редактирование записи @Model.IdAbsences</h2>
+@*Страница изменения данных об отсутвии
+
+    ActionLink - переход по ссылке на страницу
+    LabelFor - отображение названия для вводимого поля
+    HiddenFor - скрытое отображения поля
+    DropDownListFor - выпадающий список
+    ValidationMessageFor - проверка корректности ввода со стороны пользователя (отображает ошибку)
+*@
+
+<h3>Редактирование записи @Model.Date </h3>
 @using (Html.BeginForm("Modify", "Home", FormMethod.Post))
 {
-    <fieldset>
-        @Html.HiddenFor(m => m.IdAbsences)
-        <p>
-            @Html.LabelFor(m => m.Employee.Fullname, "ФИО")
-            <br />
-            @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
-
-        </p>
-            <p>
-                @Html.LabelFor(m => m.Reason, "Дата")
-                <br />
-                @Html.EditorFor(model => model.Date, "dd.MM.yyyy hh:mm", new { @class = "form-control default-date-picker" })
-
-            </p>
-        <p>
-            @Html.LabelFor(m => m.Reason, "Причина")
-            <br />
-            @Html.EditorFor(m => m.Reason)
-        </p>
-        <p><input type="submit" value="Отправить" /></p>
-    </fieldset>
+    <table>
+        <tr>
+            <td width="20%">
+                @*Уникальный номер записи об отсутствии*@
+                @Html.HiddenFor(m => m.IdAbsences)
+                @*Фамилия и инициалы*@
+                @Html.LabelFor(m => m.Employee.Fullname, "ФИО")
+            </td>
+                @*Выпадающий список с инициалами сотрудников*@
+            <td width="40%" align="left">
+                @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
+            </td>
+            <td width="40%"></td>
+        </tr>
+        <tr>
+            <td>
+                @*Дата отсутствия*@
+            @Html.LabelFor(m => m.Reason, "Дата")
+        </td>
+            @*Отображение календаря для ввода даты*@
+        <td align="left">
+            @Html.EditorFor(model => model.Date, new { @class = "form-control default-date-picker" })
+        </td>
+        <td>
+            @*Проверка вводимого значения*@
+            @Html.ValidationMessageFor(modek => Model.Date)
+        </td>
+        </tr>
+        <tr>
+            <td>
+                @*Причина отсутвия*@
+                @Html.LabelFor(m => m.Reason, "Причина")
+            </td>
+            <td align="left">
+                @*Вводится текст причины отсутствия*@
+                @Html.EditorFor(m => m.Reason)
+            </td>
+            <td>
+                @*Проверка значения*@
+                @Html.ValidationMessageFor(m => m.Reason)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                @*Кнопка подтверждения*@
+                    <input type="submit" value="Отправить" class="button15"/>
+            </td>
+        </tr>
+    </table>
 }

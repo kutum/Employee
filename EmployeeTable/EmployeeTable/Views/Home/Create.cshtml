@@ -4,22 +4,58 @@
 }
 
 
-<h2>Добавление записи об отсутствии</h2>
+<h3>Добавление записи об отсутствии</h3>
+@**
+На данной странице производится добавление новой записи в базу данных об отсутствии сотрудника
+
+    LabelFor - отображение обозначения (названия) поля для воода
+    DropDownListFor - выпадающий список
+    EditorFor - поле для ввода текста
+    ValidationMessageFor - проверка корректности ввода со стороны пользователя (отображает ошибку)
+*@
 
 @using (Html.BeginForm())
 {
-
-    @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
-    <br /><br />
-
-    @Html.EditorFor(model => model.Date, "{0:dd.MM.yyyy hh:mm}", new { @class = "form-control default-date-picker" })
-
-    <br /><br />
-    @Html.LabelFor(model => model.Reason, "Причина")
-    <br />
-    @Html.EditorFor(model => model.Reason)
-    <br /><br />
-    <input type="submit" value="Добавить" />
+<table>
+    <tr >
+        <td width="20%">
+            @Html.LabelFor(model => model.Employee.Fullname, "ФИО сотрудника")
+        </td>
+        <td width="40%" align="left"> @*Выбираем сотрудника из списка уже существующих*@
+            @Html.DropDownListFor(model => model.idEmployee, ViewBag.Employees as SelectList)
+        </td >
+        <td width="40%">
+        </td>
+    </tr>
+    <tr>
+        <td >@*Ввод даты отсутствия (и времени) при помощи календаря*@
+            @Html.LabelFor(model => model.Date, "Дата")
+        </td>
+        <td align="left">
+            @Html.EditorFor(model => model.Date, "{0:dd.MM.yyyy hh:mm}", new { @class = "form-control default-date-picker" })
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => Model.Date)
+        </td>
+    </tr>
+    <tr>
+        <td>@*Текст причины отсутствия работника*@
+            @Html.LabelFor(model => model.Reason, "Причина")
+        </td>
+        <td align="left">
+            @Html.EditorFor(model => model.Reason)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(model => Model.Reason)
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">@*Кнопка добавления*@
+            <input type="submit" value="Добавить" />
+        </td>
+    </tr>
+   
+</table>
 }
 
 

@@ -1,59 +1,58 @@
-﻿@*@model IEnumerable<EmployeeTable.Models.Absence>*@
-@model EmployeeTable.Models.AbsenceListViewModel
+﻿@model EmployeeTable.Models.AbsenceListViewModel
 
 @{
-   Layout = "~/Views/Layout/_Layout.cshtml";
+    Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+@*
+            "Главная страница". Содежит основной список сотрудников и дат их отсутствий. А так же причины
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
+             DisplayFor - отображение значения поля
+             ActionLink - переход по ссылке на страницу
+             DropDownList - выпадающий список
+    **@
+
+
 <body>
 
-    @*@RenderPage("Filter.cshtml")*@
+    <h3>Список отсутствий</h3>
 
     <form method="get">
         <div class="form-inline">
-            <label class="control-label">ФИО: </label>
-            @Html.DropDownList("Fullname", Model.Fullnames as SelectList,
-                        htmlAttributes: new { @class = "form-control" })
-            <label class="control-label">Должность: </label>
-            @Html.DropDownList("Position", Model.Position as SelectList,
-                        htmlAttributes: new { @class = "form-control" })
-            <label class="control-label">Причина: </label>
-            @Html.DropDownList("Reason", Model.Reason as SelectList,
-                        htmlAttributes: new { @class = "form-control" })
-            <input type="submit" value="Фильтр" class="btn btn-default" />
+            <table>
+                <tr class="header">
+                    @* Строка с фильтрами *@
+                    <td>
+                        <p>Фильтр</p>
+                    </td>
+                    <td>
+                        <label class="control-label">ФИО: </label>
+                        @Html.DropDownList("Fullname", Model.Fullnames as SelectList,
+                                    htmlAttributes: new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <label class="control-label">Должность: </label>
+                        @Html.DropDownList("Name", Model.Names as SelectList,
+                                    htmlAttributes: new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <label class="control-label">Причина: </label>
+                        @Html.DropDownList("Reason", Model.Reason as SelectList,
+                                    htmlAttributes: new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <input type="submit" value="Применить" class="button15" />
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
 
-
-    <p>
-        @Html.ActionLink("Добавить запись", "Create")
-    </p>
-
-    <p>
-        @Html.ActionLink("Сотрудники", "Employees")
-    </p>
     <div>
-        <table border="0">
+        <table>
+            @* Основная таблица *@
+            @* Заголовок *@
             <tr class="header">
-                @*<td>
-                    <p># п/п</p>
-                    </td>*@
-                @*<td>
-                        <p>Фамилия</p>
-                    </td>
-                    <td>
-                        <p> Имя </p>
-                    </td>
-                    <td>
-                        <p> Отчество </p>
-                    </td>*@
                 <td>
                     ФИО
                 </td>
@@ -61,46 +60,40 @@
                     <p> Должность </p>
                 </td>
                 <td>
-                    <p> Дата </p>
+                    <p> Дата отсутствия</p>
                 </td>
                 <td>
-                    <p> Причина </p>
+                    <p> Причина отсутствия </p>
                 </td>
+                <td colspan="2"></td>
             </tr>
+            @* Цикл выводящий строки из таблицы БД *@
             @foreach (var item in Model.Absences)
             {
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelitem => item.IdAbsences)
-                        </td>*@
-
-                    @*<td>
-                            @Html.DisplayFor(modelitem => item.Employee.Surname)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelitem => item.Employee.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelitem => item.Employee.Lastname)
-                        </td>*@
                     <td>
+                        @* ФИО *@
                         @Html.DisplayFor(modelitem => item.Employee.Fullname)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelitem => item.Employee.Position)
+                        @* Должность *@
+                        @*@Html.DisplayFor(modelitem => item.Employee.Position)*@
+                        @Html.DisplayFor(modelitem => item.Employee.Position.Name)
                     </td>
                     <td>
+                        @* Дата отсутствия *@
                         @Html.DisplayFor(modelitem => item.Date, "{0:dd.MM.yyyy hh:mm}", new { @class = "form-control default-date-picker" })
                     </td>
                     <td>
+                        @*Причина отсутствия*@
                         @Html.DisplayFor(modelitem => item.Reason)
                     </td>
                     <td>
-                        @Html.ActionLink("X", "Delete", new { id = item.IdAbsences })
+                        @*Кнопка удаления*@
+                        @Html.ActionLink("X", "Delete", new { id = item.IdAbsences }, new { @class = "DeleteEntry" })
                     </td>
                     <td>
-                        @Html.ActionLink("M", "Modify", new { id = item.IdAbsences })
+                        @Html.ActionLink("M", "Modify", new { id = item.IdAbsences }, new { @class = "ModifyEntry" })
                     </td>
                 </tr>
             }
@@ -110,4 +103,3 @@
 
 
 </body>
-</html>

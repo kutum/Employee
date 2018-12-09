@@ -1,3 +1,9 @@
-﻿@model DateTime?
+﻿@*Небольшой хелпер для работы с полями для вводы даты
+    Здесь берется значение, проверяется, приодится к виду день.месяц.год час:минуты
+    Выполняется функция jquery - datePicker, которая лежит в _layout и она доступна на любой странице,
+    что дает возможность использовать её с любым полем для ввода даты
+    *@
 
-@Html.TextBox("",( Model.HasValue ? Model.Value.ToString("{0:dd.MM.yyyy hh:mm}") :string.Empty), new { @class = "datePicker"})
+@model DateTime?
+
+@Html.TextBox("",( Model.HasValue ? Model.Value.ToString("dd.MM.yyyy hh:mm") :string.Empty), new { @class = "datePicker"})

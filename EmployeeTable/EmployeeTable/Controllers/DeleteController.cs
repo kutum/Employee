@@ -13,6 +13,11 @@ namespace EmployeeTable.Controllers
         AbsencesContext db = new AbsencesContext();
 
         // GET: DeleteConfirmed
+
+            /*
+             * Контроллер удаления записи об отсутствии
+             */
+
         public ActionResult Index(int id)
         {
             var absences = db.Absences.Where(x => x.IdAbsences == id);

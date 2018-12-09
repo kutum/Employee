@@ -11,8 +11,10 @@ namespace EmployeeTable.Controllers
     public class CreateController : Controller
     {
         // GET: Create
-        
-        public ActionResult Create()
+        /*
+         * Контроллер создания новой записи об отсутствии
+         */
+        public ActionResult Index()
         {
             var model = new Absence();
             model.Date = DateTime.Now;
